@@ -1,0 +1,23 @@
+[
+  {
+    "titulo": "Comercial Lanzamiento Café Origen",
+    "categoria": "marca",
+    "portada": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=80",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "descripcion": "Producción de spot publicitario 4K y 15 fotografías de producto para lanzamiento en redes sociales."
+  },
+  {
+    "titulo": "Sesión Gastronómica Restaurante Brasa",
+    "categoria": "local",
+    "portada": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=800&q=80",
+    "videoUrl": "",
+    "descripcion": "Fotografía de carta completa, ambiente del local y piezas publicitarias para pauta en Instagram."
+  },
+  {
+    "titulo": "Campaña Clínica Odontológica Sonrisa",
+    "categoria": "servicio",
+    "portada": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "descripcion": "Serie de 4 Reels testimoniales y recorridos del consultorio enfocados en captación de pacientes."
+  }
+]

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVP LAB</title>
+  <meta name="description" content="Portafolio de producción de video, fotografía comercial y publicidad para marcas, servicios y locales.">
+  
+  <!-- Tipografía moderna desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="#" class="logo">
+  <img src="assets/img/logo.png" alt="Logo MVP LAB" class="logo-img">
+  <span>MVP LAB</span>
+</a>
+
+      <nav class="nav">
+        <a href="#portafolio">Portafolio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="https://wa.me/+573208362283" target="_blank" rel="noopener" class="btn-primario">
+          Cotizar proyecto
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PORTADA (HERO) -->
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Producción Audiovisual & Publicidad</span>
+      <h1>Dónde las ideas juegan en una liga mayor</h1>
+      <p>Grabación de video comercial, fotografía de producto y campañas publicitarias para marcas, servicios y locales.]</p>
+      <div class="hero-acciones">
+        <a href="#portafolio" class="btn-primario">Ver trabajos</a>
+        <a href="https://wa.me/+573208362283" target="_blank" rel="noopener" class="btn-secundario">Hablar por WhatsApp</a>
+      </div>
+    </div>
+    <!-- CONTENEDOR SHOWREEL -->
+      <div class="showreel-wrapper" id="btn-abrir-reel">
+        <!-- OPCIÓN A: Si tienes un clip corto en MP4 (menos de 5 MB), usa esta etiqueta <video> -->
+        <video class="showreel-media" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80">
+          <source src="assets/showreel-preview.mp4" type="video/mp4">
+        </video>
+
+        <!-- Capa oscura + Botón de Play -->
+        <div class="showreel-overlay">
+          <button class="play-btn" aria-label="Reproducir Showreel">
+            <span>&#9654;</span>
+          </button>
+          <span class="showreel-texto">Ver Showreel MVP LAB (0:30)</span>
+        </div>
+      </div>
+  </section>
+
+  <!-- CARRUSEL DE PROYECTOS ANTERIORES -->
+  <section class="seccion-carrusel">
+    <div class="container">
+      <div class="carrusel-header">
+        <div>
+          <span class="categoria-tag">Trayectoria</span>
+          <h2>Proyectos Anteriores</h2>
+        </div>
+        <div class="carrusel-controles">
+          <button class="carrusel-btn" id="carrusel-prev" aria-label="Anterior">&#10094;</button>
+          <button class="carrusel-btn" id="carrusel-next" aria-label="Siguiente">&#10095;</button>
+        </div>
+      </div>
+
+      <div class="carrusel-viewport">
+        <div class="carrusel-track" id="carrusel-track">
+          <!-- Las fotos se cargan automáticamente desde carrusel.json -->
+        </div>
+      </div>
+
+      <div class="carrusel-dots" id="carrusel-dots"></div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE PORTAFOLIO (SE LLENA AUTOMÁTICAMENTE DESDE JSON) -->
+  <section id="portafolio" class="seccion-portafolio">
+    <div class="container">
+      <div class="portafolio-header">
+        <h2>Nuestros Proyectos</h2>
+        
+        <!-- Botones de filtro por categoría -->
+        <div class="filtros" id="filtros">
+          <button class="filtro-btn activo" data-categoria="todos">Todos</button>
+          <button class="filtro-btn" data-categoria="marca">Marca</button>
+          <button class="filtro-btn" data-categoria="servicio">Servicio</button>
+          <button class="filtro-btn" data-categoria="local">Local</button>
+        </div>
+      </div>
+
+      <!-- Cuadrícula donde JavaScript insertará las tarjetas -->
+      <div class="galeria-grid" id="galeria-grid"></div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS RÁPIDOS -->
+  <section id="servicios" class="seccion-servicios">
+    <div class="container">
+      <h2>¿Qué hacemos?</h2>
+      <div class="servicios-grid">
+        <div class="servicio-card">
+          <h3>Video Comercial & Reels</h3>
+          <p>Producción, dirección y edición de video en alta definición para redes sociales, pauta digital y comerciales.</p>
+        </div>
+        <div class="servicio-card">
+          <h3>Fotografía Profesional</h3>
+          <p>Sesiones de producto, gastronomía, espacios comerciales y retratos corporativos con iluminación de estudio.</p>
+        </div>
+        <div class="servicio-card">
+          <h3>Creación de Publicidad</h3>
+          <p>Conceptualización visual y piezas publicitarias diseñadas para atraer clientes y posicionar tu negocio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <strong class="logo">MVP LAB</strong>
+        <p>CHIA, CUNDINAMARCA · PRUEBA@MVP.COM</p>
+      </div>
+      <div class="redes">
+        <a href="https://www.instagram.com/mvp_lab_/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/+573208362283" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- VENTANA EMERGENTE (MODAL) PARA VER VIDEO Y DETALLE DEL PROYECTO -->
+  <div class="modal" id="proyecto-modal" aria-hidden="true">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar">&times;</button>
+      <div class="modal-media" id="modal-media"></div>
+      <div class="modal-info">
+        <span class="categoria-tag" id="modal-categoria"></span>
+        <h3 id="modal-titulo"></h3>
+        <p id="modal-descripcion"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
