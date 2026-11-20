@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import gsap from 'gsap';
+import HoloMosaic from './components/HoloMosaic';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Carrusel from './components/Carrusel';
@@ -97,6 +98,26 @@ export default function App() {
 
   return (
     <>
+      {/* Fondo HoloMosaic interactivo de React Bits */}
+      <div className="holo-bg-fixed" aria-hidden="true">
+        <HoloMosaic
+          color="#121118"
+          metalColor="#68CC03"
+          spectrum="pearl"
+          saturation={0.35}
+          glitter={0.8}
+          intensity={1.3}
+          speed={0.4}
+          tileSize={1.1}
+          gap={0.06}
+          roundness={0.18}
+          bevel={0.3}
+          intro={false}
+          mouseInteraction={true}
+          flipOnClick={true}
+        />
+      </div>
+
       <Header />
       <main>
         <Hero onOpenReel={abrirShowreel} />

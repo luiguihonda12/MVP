@@ -1008,6 +1008,11 @@ body {
   box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
 }
 
+.specular-btn-whatsapp {
+  width: 100% !important;
+  font-weight: 700;
+}
+
 .contacto-datos-lista {
   background-color: var(--color-superficie);
   border: 1px solid var(--color-borde);
@@ -1774,4 +1779,58 @@ body {
   background-color: var(--color-acento);
   color: #000;
   border-color: var(--color-acento);
+}
+
+/* =========================================================
+   ESTRUCTURA DE FONDO HOLOGRÁFICO E INTERCALADO (REACT BITS)
+   ========================================================= */
+html {
+  background-color: #0B0B0D !important;
+  color-scheme: dark;
+}
+
+body {
+  background-color: #0B0B0D !important;
+  color: var(--color-texto);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.holo-bg-fixed {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: #0B0B0D;
+}
+
+/* Secciones transparentes que revelan el fondo holográfico intercalado */
+.hero,
+.seccion-portafolio,
+.seccion-servicios,
+.seccion-contacto {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Secciones con fondo negro sólido por encima del fondo holográfico */
+.seccion-carrusel,
+.seccion-comparador,
+.seccion-proceso,
+.footer {
+  position: relative;
+  z-index: 2;
+  background: #000000 !important;
+  background-color: #000000 !important;
+  border-top: 1px solid var(--color-borde);
+  border-bottom: 1px solid var(--color-borde);
+  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.95);
 }

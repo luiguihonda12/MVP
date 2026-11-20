@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import SpecularButton from './SpecularButton';
 
 export default function Hero({ onOpenReel }) {
   const heroRef = useRef(null);
@@ -23,7 +24,7 @@ export default function Hero({ onOpenReel }) {
         y: 20,
         duration: 0.7,
       }, '-=0.4')
-      .from('.hero-acciones a', {
+      .from('.hero-acciones a, .hero-acciones .specular-button', {
         opacity: 0,
         y: 15,
         stagger: 0.15,
@@ -51,12 +52,26 @@ export default function Hero({ onOpenReel }) {
           <a href="#portafolio" className="btn-primario">
             Ver trabajos
           </a>
-          <a
-            href="#contacto"
-            className="btn-secundario"
+          <SpecularButton
+            href="https://wa.me/+573208362283?text=Hola%20MVP%20LAB,%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto"
+            target="_blank"
+            rel="noopener noreferrer"
+            size="md"
+            radius={8}
+            tint="#16161A"
+            tintOpacity={0.65}
+            lineColor="#68CC03"
+            baseColor="#2A2A32"
+            textColor="#FFFFFF"
+            intensity={1.5}
+            idleIntensity={0.45}
+            thickness={1.4}
+            glow={1.3}
+            autoAnimate={true}
+            speed={0.35}
           >
             Hablar por WhatsApp
-          </a>
+          </SpecularButton>
         </div>
       </div>
 
