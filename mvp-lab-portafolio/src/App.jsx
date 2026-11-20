@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Carrusel from './components/Carrusel';
 import Portafolio from './components/Portafolio';
 import Servicios from './components/Servicios';
+import Contacto from './components/Contacto';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
 
@@ -32,6 +33,7 @@ export default function App() {
         <Carrusel />
         <Portafolio onSelectProyecto={setProyectoModal} />
         <Servicios />
+        <Contacto />
       </main>
       <Footer />
       <Modal proyecto={proyectoModal} onClose={cerrarModal} />

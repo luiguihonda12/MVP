@@ -10,8 +10,8 @@ const SERVICIOS = [
       'Producción, dirección y edición de video en alta definición para redes sociales, pauta digital y comerciales.',
     detalles: [
       'Grabación 4K y tomas cinematográficas',
-      'Edición dinámica para Reels, TikTok y YouTube',
-      'Colorización y diseño de sonido envolvente',
+      'Edición dinámica para Reels, TikTok y redes sociales',
+      'Colorización y diseño de sonido',
     ],
   },
   {
@@ -22,7 +22,6 @@ const SERVICIOS = [
     descripcion:
       'Sesiones de producto, gastronomía, espacios comerciales y retratos corporativos con iluminación de estudio.',
     detalles: [
-      'Iluminación de estudio en locación',
       'Fotografía de catálogo, e-commerce y menú',
       'Retoque digital en alta resolución',
     ],

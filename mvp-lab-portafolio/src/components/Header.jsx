@@ -10,6 +10,7 @@ export default function Header() {
         <nav className="nav">
           <a href="#portafolio">Portafolio</a>
           <a href="#servicios">Servicios</a>
+          <a href="#contacto">Contacto</a>
           <a
             href="https://wa.me/+573208362283"
             target="_blank"
