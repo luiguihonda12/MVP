@@ -161,92 +161,246 @@ body {
 .portafolio-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .portafolio-header h2,
 .seccion-servicios h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 800;
 }
 
-.filtros {
+.portafolio-subtitulo {
+  color: var(--color-texto-suave);
+  font-size: 0.95rem;
+  margin-top: 0.4rem;
+  max-width: 600px;
+}
+
+.filtros-wrapper {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .filtro-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background-color: var(--color-superficie);
   color: var(--color-texto-suave);
   border: 1px solid var(--color-borde);
   padding: 0.5rem 1.1rem;
-  border-radius: 8px;
+  border-radius: 999px;
   font-family: var(--fuente);
   font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
-.filtro-btn:hover,
+.filtro-btn:hover {
+  border-color: var(--color-acento);
+  color: var(--color-texto);
+}
+
 .filtro-btn.activo {
   background-color: var(--color-acento);
   color: #FFFFFF;
   border-color: var(--color-acento);
+  box-shadow: 0 4px 15px rgba(104, 204, 3, 0.25);
 }
 
-/* CUADRÍCULA RESPONSIVE AUTOMÁTICA */
-.galeria-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-  gap: 1.8rem;
+.filtro-badge {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 700;
 }
 
-.proyecto-card {
+.filtro-btn.activo .filtro-badge {
+  background-color: rgba(0, 0, 0, 0.25);
+  color: #FFFFFF;
+}
+
+/* CUADRÍCULA MASONRY ASIMÉTRICA */
+.galeria-masonry {
+  column-count: 3;
+  column-gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .galeria-masonry {
+    column-count: 2;
+    column-gap: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .galeria-masonry {
+    column-count: 1;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+}
+
+.masonry-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
   background-color: var(--color-superficie);
   border: 1px solid var(--color-borde);
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.proyecto-card:hover {
-  transform: translateY(-5px);
+.masonry-item:hover .masonry-card {
+  transform: translateY(-4px) scale(1.01);
   border-color: var(--color-acento);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(104, 204, 3, 0.18);
 }
 
-.card-imagen-wrap {
-  position: relative;
+/* Proporciones asimétricas */
+.masonry-item.aspect-vertical .masonry-imagen {
+  aspect-ratio: 4 / 5;
+}
+
+.masonry-item.aspect-horizontal .masonry-imagen {
   aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background-color: #000;
 }
 
-.card-imagen-wrap img {
+.masonry-item.aspect-cuadrado .masonry-imagen {
+  aspect-ratio: 1 / 1;
+}
+
+.masonry-imagen {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.masonry-item:hover .masonry-imagen {
+  transform: scale(1.06);
 }
 
 .indicador-video {
   position: absolute;
   top: 12px;
   right: 12px;
+  z-index: 5;
   background-color: rgba(0, 0, 0, 0.75);
   color: #FFF;
   padding: 0.25rem 0.65rem;
   border-radius: 6px;
   font-size: 0.75rem;
   font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  backdrop-filter: blur(4px);
 }
 
-.card-body {
-  padding: 1.3rem;
+.indicador-video span {
+  color: var(--color-acento);
+  font-size: 0.65rem;
+}
+
+/* Capa interactiva de hover en las tarjetas */
+.masonry-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 11, 13, 0.65) 0%,
+    rgba(11, 11, 13, 0.2) 35%,
+    rgba(11, 11, 13, 0.96) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.masonry-item:hover .masonry-overlay {
+  opacity: 1;
+}
+
+.overlay-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.categoria-tag-mini {
+  background-color: rgba(104, 204, 3, 0.2);
+  color: var(--color-acento);
+  border: 1px solid rgba(104, 204, 3, 0.4);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+}
+
+.lightbox-icon-hint {
+  font-size: 1.15rem;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.overlay-bottom h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+
+.overlay-bottom p {
+  font-size: 0.84rem;
+  color: var(--color-texto-suave);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.7rem;
+}
+
+.btn-ver-lightbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-acento);
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 .categoria-tag {
@@ -257,16 +411,6 @@ body {
   color: var(--color-acento);
   letter-spacing: 0.5px;
   margin-bottom: 0.4rem;
-}
-
-.card-body h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.card-body p {
-  color: var(--color-texto-suave);
-  font-size: 0.92rem;
 }
 
 /* SERVICIOS */
@@ -1039,4 +1183,595 @@ body {
   .contacto-grid {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* =========================================================
+   LIGHTBOX PANTALLA COMPLETA
+   ========================================================= */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(6, 6, 8, 0.96);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: lightboxFadeIn 0.25s ease-out;
+}
+
+@keyframes lightboxFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox-topbar {
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  right: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1010;
+}
+
+.lightbox-contador {
+  background-color: rgba(22, 22, 26, 0.85);
+  border: 1px solid var(--color-borde);
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-texto);
+  letter-spacing: 1px;
+}
+
+.lightbox-contador span:first-child {
+  color: var(--color-acento);
+}
+
+.lightbox-btn-cerrar {
+  background-color: rgba(22, 22, 26, 0.85);
+  border: 1px solid var(--color-borde);
+  color: #FFFFFF;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.lightbox-btn-cerrar:hover {
+  background-color: var(--color-acento);
+  color: #000;
+  border-color: var(--color-acento);
+  transform: rotate(90deg);
+}
+
+.lightbox-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1010;
+  background-color: rgba(22, 22, 26, 0.85);
+  border: 1px solid var(--color-borde);
+  color: #FFFFFF;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.lightbox-nav-btn:hover {
+  background-color: var(--color-acento);
+  color: #000;
+  border-color: var(--color-acento);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+  left: 2rem;
+}
+
+.lightbox-next {
+  right: 2rem;
+}
+
+@media (max-width: 768px) {
+  .lightbox-prev {
+    left: 0.6rem;
+    width: 44px;
+    height: 44px;
+  }
+  .lightbox-next {
+    right: 0.6rem;
+    width: 44px;
+    height: 44px;
+  }
+  .lightbox-topbar {
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+  }
+}
+
+.lightbox-content-wrapper {
+  max-width: 1100px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1005;
+}
+
+.lightbox-media-container {
+  max-width: 100%;
+  max-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
+}
+
+.lightbox-video-frame {
+  width: 80vw;
+  max-width: 960px;
+  aspect-ratio: 16 / 9;
+}
+
+.lightbox-video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 14px;
+}
+
+.lightbox-imagen-hd {
+  max-height: 68vh;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+  display: block;
+}
+
+.lightbox-info-bar {
+  margin-top: 1.2rem;
+  text-align: center;
+  max-width: 750px;
+}
+
+.lightbox-info-text h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0.35rem 0;
+  color: #FFFFFF;
+}
+
+.lightbox-info-text p {
+  color: var(--color-texto-suave);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   SECCIÓN PROCESO DE TRABAJO (3 PASOS)
+   ========================================================= */
+.seccion-proceso {
+  padding: 5rem 0;
+  border-top: 1px solid var(--color-borde);
+  background: linear-gradient(180deg, rgba(11, 11, 13, 0) 0%, rgba(22, 22, 26, 0.45) 100%);
+}
+
+.proceso-header {
+  margin-bottom: 3rem;
+}
+
+.proceso-header h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-top: 0.3rem;
+}
+
+.proceso-subtitulo {
+  color: var(--color-texto-suave);
+  font-size: 1rem;
+  max-width: 650px;
+  margin-top: 0.5rem;
+  line-height: 1.55;
+}
+
+.proceso-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 2rem;
+  position: relative;
+}
+
+.proceso-card {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 16px;
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.proceso-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-acento);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(104, 204, 3, 0.12);
+}
+
+.proceso-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.proceso-numero {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--color-acento);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.proceso-icono {
+  font-size: 1.8rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(104, 204, 3, 0.08);
+  border: 1px solid rgba(104, 204, 3, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proceso-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--color-texto);
+}
+
+.proceso-descripcion {
+  color: var(--color-texto-suave);
+  font-size: 0.94rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.proceso-beneficio-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(104, 204, 3, 0.1);
+  color: var(--color-acento);
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid rgba(104, 204, 3, 0.25);
+  align-self: flex-start;
+}
+
+.proceso-check {
+  font-weight: 800;
+}
+
+.proceso-conector-flecha {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .proceso-card:not(:last-child) .proceso-conector-flecha {
+    display: flex;
+    position: absolute;
+    right: -1.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    background-color: #121216;
+    border: 1px solid var(--color-acento);
+    color: var(--color-acento);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    box-shadow: 0 0 12px rgba(104, 204, 3, 0.2);
+  }
+}
+
+/* BANNER CTA INFERIOR */
+.proceso-cta-banner {
+  margin-top: 3.5rem;
+  background: linear-gradient(135deg, #181c16 0%, #131416 100%);
+  border: 1px solid rgba(104, 204, 3, 0.3);
+  border-radius: 16px;
+  padding: 2.2rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.proceso-cta-texto h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+  color: #FFFFFF;
+}
+
+.proceso-cta-texto p {
+  color: var(--color-texto-suave);
+  font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   SECCIÓN COMPARADOR ANTES Y DESPUÉS (COLOR GRADING)
+   ========================================================= */
+.seccion-comparador {
+  padding: 5rem 0;
+  border-top: 1px solid var(--color-borde);
+  background: linear-gradient(180deg, rgba(22, 22, 26, 0.3) 0%, rgba(11, 11, 13, 0) 100%);
+}
+
+.comparador-header {
+  margin-bottom: 2.5rem;
+}
+
+.comparador-header h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-top: 0.3rem;
+}
+
+.comparador-subtitulo {
+  color: var(--color-texto-suave);
+  font-size: 1rem;
+  max-width: 650px;
+  margin-top: 0.5rem;
+  line-height: 1.55;
+}
+
+.comparador-tabs {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.comparador-tab-btn {
+  background-color: var(--color-superficie);
+  color: var(--color-texto-suave);
+  border: 1px solid var(--color-borde);
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  font-family: var(--fuente);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.comparador-tab-btn:hover {
+  border-color: var(--color-acento);
+  color: var(--color-texto);
+}
+
+.comparador-tab-btn.activo {
+  background-color: var(--color-acento);
+  color: #FFFFFF;
+  border-color: var(--color-acento);
+  box-shadow: 0 4px 15px rgba(104, 204, 3, 0.25);
+}
+
+.comparador-card {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.comparador-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  user-select: none;
+  cursor: ew-resize;
+  background-color: #000;
+}
+
+@media (max-width: 640px) {
+  .comparador-viewport {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.comparador-capa {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.comparador-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Efecto de perfil crudo / plano Log */
+.img-antes {
+  filter: saturate(0.45) contrast(0.75) brightness(1.14) sepia(0.06);
+}
+
+/* Efecto de color grading y etalonado profesional */
+.img-despues {
+  filter: saturate(1.26) contrast(1.18) brightness(1.02);
+}
+
+.capa-antes {
+  z-index: 10;
+  border-right: 2px solid var(--color-acento);
+}
+
+.capa-despues {
+  z-index: 5;
+}
+
+/* Badges flotantes indicativos */
+.comparador-badge {
+  position: absolute;
+  top: 1rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(8px);
+  z-index: 15;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.badge-antes {
+  left: 1rem;
+  background-color: rgba(18, 18, 22, 0.85);
+  color: #A1A1AA;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.badge-despues {
+  right: 1rem;
+  background-color: rgba(18, 18, 22, 0.85);
+  color: var(--color-acento);
+  border: 1px solid rgba(104, 204, 3, 0.4);
+}
+
+/* Línea divisoria y manija interactiva */
+.comparador-linea {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--color-acento);
+  z-index: 20;
+  transform: translateX(-50%);
+  pointer-events: none;
+  box-shadow: 0 0 14px rgba(104, 204, 3, 0.7);
+}
+
+.comparador-manija {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #121216;
+  border: 2px solid var(--color-acento);
+  color: var(--color-acento);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(104, 204, 3, 0.6);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.manija-flechas {
+  letter-spacing: -1px;
+}
+
+/* Input nativo transparente para interacción táctil fluida */
+.comparador-range-invisible {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 25;
+  margin: 0;
+}
+
+/* Pie de información y presets */
+.comparador-info-footer {
+  padding: 1.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  border-top: 1px solid var(--color-borde);
+  background-color: var(--color-superficie);
+}
+
+.comparador-info-footer h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-texto);
+  margin-bottom: 0.3rem;
+}
+
+.comparador-info-footer p {
+  color: var(--color-texto-suave);
+  font-size: 0.92rem;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.comparador-presets {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-preset {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-borde);
+  color: var(--color-texto);
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-preset:hover {
+  background-color: var(--color-acento);
+  color: #000;
+  border-color: var(--color-acento);
 }

@@ -12,9 +12,7 @@ export default function Hero({ onOpenReel }) {
             Ver trabajos
           </a>
           <a
-            href="https://wa.me/+573208362283"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contacto"
             className="btn-secundario"
           >
             Hablar por WhatsApp
