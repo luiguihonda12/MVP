@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
+import gsap from 'gsap';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Carrusel from './components/Carrusel';
@@ -16,6 +19,47 @@ export default function App() {
     proyectos: [],
     currentIndex: 0,
   });
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      smoothWheel: true,
+    });
+
+    window.lenis = lenis;
+
+    // Sincronizar el loop de render con GSAP Ticker
+    const updateLenis = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateLenis);
+    gsap.ticker.lagSmoothing(0);
+
+    // Desplazamiento suave para enlaces ancla (#portafolio, #servicios, etc.)
+    const handleAnchorClick = (e) => {
+      const anchor = e.target.closest('a[href^="#"]');
+      if (anchor) {
+        const targetId = anchor.getAttribute('href');
+        if (targetId && targetId !== '#') {
+          const targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            lenis.scrollTo(targetEl, { offset: -70, duration: 1.2 });
+          }
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+
+    return () => {
+      document.removeEventListener('click', handleAnchorClick);
+      gsap.ticker.remove(updateLenis);
+      lenis.destroy();
+      delete window.lenis;
+    };
+  }, []);
 
   const abrirLightbox = (proyectos, index = 0) => {
     setLightboxState({

@@ -1,4 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import JellyRadio from './JellyRadio';
 import proyectosData from '../data/proyectos.json';
 
 const PESTANAS = [
@@ -28,6 +30,29 @@ export default function Portafolio({ onOpenLightbox }) {
     return proyectosData.filter((item) => item.categoria === filtroActivo);
   }, [filtroActivo]);
 
+  const galeriaRef = useRef(null);
+
+  useEffect(() => {
+    if (galeriaRef.current && galeriaRef.current.children.length > 0) {
+      gsap.fromTo(
+        galeriaRef.current.children,
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.45, stagger: 0.06, ease: 'power2.out' }
+      );
+    }
+  }, [filtroActivo]);
+
+  // Opciones para el JellyRadio con conteo
+  const jellyItems = useMemo(
+    () =>
+      PESTANAS.map((tab) => ({
+        value: tab.id,
+        label: tab.label,
+        badge: conteoPorCategoria[tab.id] || 0,
+      })),
+    [conteoPorCategoria]
+  );
+
   return (
     <section id="portafolio" className="seccion-portafolio">
       <div className="container">
@@ -40,26 +65,23 @@ export default function Portafolio({ onOpenLightbox }) {
             </p>
           </div>
 
-          {/* Pestañas de filtro rápido */}
-          <div className="filtros-wrapper" role="tablist" aria-label="Filtros del portafolio">
-            {PESTANAS.map((tab) => (
-              <button
-                key={tab.id}
-                role="tab"
-                aria-selected={filtroActivo === tab.id}
-                type="button"
-                className={`filtro-btn ${filtroActivo === tab.id ? 'activo' : ''}`}
-                onClick={() => setFiltroActivo(tab.id)}
-              >
-                <span>{tab.label}</span>
-                <span className="filtro-badge">{conteoPorCategoria[tab.id] || 0}</span>
-              </button>
-            ))}
+          {/* Filtros dinámicos con efecto Jelly Radio de React Bits */}
+          <div className="filtros-wrapper">
+            <JellyRadio
+              items={jellyItems}
+              value={filtroActivo}
+              onChange={(nuevoFiltro) => setFiltroActivo(nuevoFiltro)}
+              chipColor="#16161A"
+              activeColor="#68CC03"
+              textColor="#A1A1AA"
+              activeTextColor="#0B0B0D"
+              ariaLabel="Filtros del portafolio"
+            />
           </div>
         </div>
 
         {/* Cuadrícula asimétrica (Masonry) */}
-        <div className="galeria-masonry">
+        <div className="galeria-masonry" ref={galeriaRef}>
           {proyectosFiltrados.map((proyecto, idx) => (
             <div
               key={proyecto.id || idx}

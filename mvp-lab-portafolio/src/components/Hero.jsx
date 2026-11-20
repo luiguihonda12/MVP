@@ -1,6 +1,46 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+
 export default function Hero({ onOpenReel }) {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.from('.badge', {
+        opacity: 0,
+        y: -15,
+        duration: 0.6,
+      })
+      .from('h1', {
+        opacity: 0,
+        y: 25,
+        duration: 0.8,
+      }, '-=0.3')
+      .from('p', {
+        opacity: 0,
+        y: 20,
+        duration: 0.7,
+      }, '-=0.4')
+      .from('.hero-acciones a', {
+        opacity: 0,
+        y: 15,
+        stagger: 0.15,
+        duration: 0.5,
+      }, '-=0.3')
+      .from('.showreel-wrapper', {
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.8,
+      }, '-=0.4');
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="hero">
+    <section className="hero" ref={heroRef}>
       <div className="container">
         <span className="badge">Producción Audiovisual & Publicidad</span>
         <h1>Dónde las ideas juegan en una liga mayor</h1>

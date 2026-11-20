@@ -21,9 +21,10 @@ export default function Lightbox({ isOpen, proyectos, currentIndex, onClose, onN
   useEffect(() => {
     if (!isOpen) return;
 
-    // Bloquear scroll del documento
+    // Bloquear scroll del documento y pausar Lenis
     const scrollAnterior = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    window.lenis?.stop();
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
@@ -38,6 +39,7 @@ export default function Lightbox({ isOpen, proyectos, currentIndex, onClose, onN
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = scrollAnterior;
+      window.lenis?.start();
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose, handlePrev, handleNext]);
