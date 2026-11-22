@@ -13,8 +13,14 @@ import Proceso from './components/Proceso';
 import Contacto from './components/Contacto';
 import Footer from './components/Footer';
 import Lightbox from './components/Lightbox';
+import NotFound from './components/NotFound';
 
 export default function App() {
+  const [is404, setIs404] = useState(() => {
+    const p = window.location.pathname;
+    return p === '/404' || (p !== '/' && p !== '' && !p.startsWith('/#'));
+  });
+
   const [lightboxState, setLightboxState] = useState({
     isOpen: false,
     proyectos: [],
@@ -22,6 +28,18 @@ export default function App() {
   });
 
   useEffect(() => {
+    const checkPath = () => {
+      const p = window.location.pathname;
+      setIs404(p === '/404' || (p !== '/' && p !== '' && !p.startsWith('/#')));
+    };
+
+    window.addEventListener('popstate', checkPath);
+    return () => window.removeEventListener('popstate', checkPath);
+  }, []);
+
+  useEffect(() => {
+    if (is404) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       smoothWheel: true,
@@ -60,7 +78,19 @@ export default function App() {
       lenis.destroy();
       delete window.lenis;
     };
-  }, []);
+  }, [is404]);
+
+  const irAInicio = () => {
+    window.history.pushState({}, '', '/');
+    setIs404(false);
+    window.scrollTo(0, 0);
+  };
+
+  const irA404 = () => {
+    window.history.pushState({}, '', '/404');
+    setIs404(true);
+    window.scrollTo(0, 0);
+  };
 
   const abrirLightbox = (proyectos, index = 0) => {
     setLightboxState({
@@ -96,6 +126,11 @@ export default function App() {
     );
   };
 
+  // Si estamos en la ruta 404, mostrar la vista NotFound inspirada en Dondre Green
+  if (is404) {
+    return <NotFound onGoHome={irAInicio} />;
+  }
+
   return (
     <>
       {/* Fondo HoloMosaic interactivo de React Bits */}
@@ -128,7 +163,7 @@ export default function App() {
         <Proceso />
         <Contacto />
       </main>
-      <Footer />
+      <Footer onNavigate404={irA404} />
       <Lightbox
         isOpen={lightboxState.isOpen}
         proyectos={lightboxState.proyectos}

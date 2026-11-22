@@ -1834,3 +1834,23 @@ body {
   border-bottom: 1px solid var(--color-borde);
   box-shadow: 0 10px 45px rgba(0, 0, 0, 0.95);
 }
+
+
+/* Botón discreto en el footer para probar el 404 */
+.footer-link-404 {
+  background: none;
+  border: 1px solid var(--color-borde);
+  color: var(--color-texto-suave);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.footer-link-404:hover {
+  border-color: var(--color-acento);
+  color: var(--color-acento);
+}
