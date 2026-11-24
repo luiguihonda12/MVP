@@ -15,8 +15,10 @@ import Contacto from './components/Contacto';
 import Footer from './components/Footer';
 import Lightbox from './components/Lightbox';
 import NotFound from './components/NotFound';
+import Preloader from './components/Preloader';
 
 export default function App() {
+  const [cargando, setCargando] = useState(true);
   const [is404, setIs404] = useState(() => {
     const p = window.location.pathname;
     return p === '/404' || (p !== '/' && p !== '' && !p.startsWith('/#'));
@@ -134,6 +136,9 @@ export default function App() {
 
   return (
     <>
+      {/* Pantalla de carga (Preloader) con logo animado y llenado vertical verde */}
+      {cargando && <Preloader onFinish={() => setCargando(false)} />}
+
       {/* Fondo FaultyTerminal interactivo de React Bits (@react-bits/FaultyTerminal-JS-CSS) */}
       <div className="terminal-bg-fixed" aria-hidden="true">
         <FaultyTerminal
