@@ -1379,7 +1379,7 @@ body {
    SECCIÓN PROCESO DE TRABAJO (3 PASOS)
    ========================================================= */
 .seccion-proceso {
-  padding: 5rem 0;
+  padding: 5rem 0 3rem;
   border-top: 1px solid var(--color-borde);
   background: linear-gradient(180deg, rgba(11, 11, 13, 0) 0%, rgba(22, 22, 26, 0.45) 100%);
 }
@@ -1514,7 +1514,7 @@ body {
 
 /* BANNER CTA INFERIOR */
 .proceso-cta-banner {
-  margin-top: 3.5rem;
+  margin-top: 2rem;
   background: linear-gradient(135deg, #181c16 0%, #131416 100%);
   border: 1px solid rgba(104, 204, 3, 0.3);
   border-radius: 16px;
@@ -1799,7 +1799,8 @@ body {
   min-height: 100vh;
 }
 
-.holo-bg-fixed {
+.holo-bg-fixed,
+.terminal-bg-fixed {
   position: fixed;
   inset: 0;
   width: 100vw;
@@ -1853,4 +1854,258 @@ body {
 .footer-link-404:hover {
   border-color: var(--color-acento);
   color: var(--color-acento);
+}
+
+
+/* =========================================================
+   SECCIÓN PRECIOS Y PAQUETES (FOTO + VIDEO)
+   ========================================================= */
+.seccion-precios {
+  padding: 2.5rem 0 4rem;
+  border-top: 1px solid var(--color-borde);
+  background: linear-gradient(180deg, rgba(11, 11, 13, 0) 0%, rgba(22, 22, 26, 0.35) 100%);
+}
+
+.precios-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.precios-header h2 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-top: 0.4rem;
+}
+
+.precios-subtitulo {
+  color: var(--color-texto-suave);
+  font-size: 1rem;
+  max-width: 650px;
+  margin: 0.5rem auto 0;
+  line-height: 1.55;
+}
+
+/* CONTENEDOR WRAPPER DEL SWITCH JELLY RADIO */
+.precios-filtro-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.8rem;
+}
+
+.precios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.precio-card {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 18px;
+  padding: 2.4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.precio-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-acento);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(104, 204, 3, 0.12);
+}
+
+/* Plan PRO Destacado */
+.precio-card-popular {
+  border-color: rgba(104, 204, 3, 0.5);
+  background: linear-gradient(145deg, #181c16 0%, #131418 100%);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.55), 0 0 30px rgba(104, 204, 3, 0.18);
+  transform: scale(1.02);
+}
+
+.precio-card-popular:hover {
+  transform: scale(1.02) translateY(-5px);
+  border-color: var(--color-acento);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(104, 204, 3, 0.25);
+}
+
+.precio-badge-popular {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-acento);
+  color: #0B0B0D;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 0 15px rgba(104, 204, 3, 0.6);
+  white-space: nowrap;
+}
+
+.precio-card-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.precio-tag-combo {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-acento);
+  margin-bottom: 0.4rem;
+}
+
+.precio-plan-nombre {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.4rem;
+}
+
+.precio-plan-desc {
+  color: var(--color-texto-suave);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  min-height: 40px;
+}
+
+.precio-monto-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin-top: 1.2rem;
+}
+
+.precio-monto {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+}
+
+.precio-moneda {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-acento);
+}
+
+.precio-divisor {
+  height: 1px;
+  background-color: var(--color-borde);
+  margin: 1.5rem 0;
+}
+
+.precio-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex: 1;
+}
+
+.precio-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  font-size: 0.92rem;
+  color: var(--color-texto);
+  line-height: 1.4;
+}
+
+.precio-check {
+  color: var(--color-acento);
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-top: 0.1rem;
+}
+
+.btn-precio {
+  width: 100%;
+  text-align: center;
+  padding: 0.85rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+/* Nota inferior para proyectos a la medida */
+.precios-footer-custom {
+  margin-top: 3.5rem;
+  text-align: center;
+  background-color: var(--color-superficie);
+  border: 1px dashed var(--color-borde);
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+}
+
+.precios-footer-custom p {
+  color: var(--color-texto-suave);
+  font-size: 0.95rem;
+}
+
+.precios-link-custom {
+  color: var(--color-acento);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.precios-link-custom:hover {
+  color: var(--color-acento-hover);
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .precio-card-popular {
+    transform: none;
+  }
+  .precio-card-popular:hover {
+    transform: translateY(-5px);
+  }
+}
+
+
+/* FILAS UNIFICADAS DE PRECIOS EN LA MISMA SECCIÓN */
+.precios-fila-header {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.precios-fila-segunda {
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.precios-fila-tag {
+  display: inline-block;
+  background-color: rgba(104, 204, 3, 0.12);
+  color: var(--color-acento);
+  border: 1px solid rgba(104, 204, 3, 0.3);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.precios-fila-header h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #FFFFFF;
 }
